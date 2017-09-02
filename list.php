@@ -5,7 +5,7 @@
     <meta charset="utf-8">
 </head>
 <?php
-$dir = "DownloadedTests";
+$dir = 'DownloadedTests';
 $tests = scandir($dir);
 $tests = array_reverse($tests);
 $kol = count($tests);

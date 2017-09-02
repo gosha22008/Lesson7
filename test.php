@@ -7,7 +7,7 @@
 <?php
 $aa = $_GET;
 $k = key($aa);
-$file = file_get_contents("DownloadedTests\\" . $_GET[$k]);
+$file = file_get_contents(__DIR__.'/DownloadedTests/' . $_GET[$k]);
 $file1 = json_decode($file, true);
 ?>
 <body>
@@ -29,7 +29,6 @@ $file1 = json_decode($file, true);
 </body>
 </html>
 <?php
-unset($_GET);
 $priem = $_POST;
 if (!empty($priem)) {
     foreach ($file1 as $key => $value) {
@@ -43,7 +42,8 @@ if (!empty($priem)) {
 <input type="submit" value="отправить">
 </form>
 ';
+    $name = "";
+    $name = $_POST['name'];
+    echo $name;
 }
-$name = $_POST['name'];
-echo $name;
 ?>
