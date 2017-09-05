@@ -1,7 +1,7 @@
 <!DOCTYPE>
 <html lang="ru">
 <head>
-    <title>Задание6</title>
+    <title>Задание7</title>
     <meta charset="utf-8">
 </head>
 <?php
@@ -11,8 +11,6 @@ $tests = array_reverse($tests);
 $kol = count($tests);
 unset($tests[$kol - 1], $tests[$kol - 2]);
 $tests = array_reverse($tests);
-//echo '<pre>';
-//print_r($tests);
 ?>
 <body>
 <h3>

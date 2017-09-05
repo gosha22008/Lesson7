@@ -1,14 +1,24 @@
+<?php
+ob_start();
+?>
 <!DOCTYPE>
 <html lang="ru">
 <head>
-    <title>Задание6</title>
+    <title>Задание7</title>
     <meta charset="utf-8">
 </head>
 <?php
 $aa = $_GET;
 $k = key($aa);
-$file = file_get_contents(__DIR__.'/DownloadedTests/' . $_GET[$k]);
-$file1 = json_decode($file, true);
+if (file_exists(__DIR__.'/DownloadedTests/' . $_GET[$k])){
+    $file = file_get_contents(__DIR__.'/DownloadedTests/' . $_GET[$k]);
+    $file1 = json_decode($file, true);
+}else {
+   header("HTTP/1.0 404 Not Found");
+   //http_response_code(404);
+   die('такого файла не найдено!') ;
+   ob_end_flush();
+}
 ?>
 <body>
 <h3>
@@ -29,21 +39,30 @@ $file1 = json_decode($file, true);
 </body>
 </html>
 <?php
+include_once 'GD.php';
 $priem = $_POST;
+$i = 0;
 if (!empty($priem)) {
     foreach ($file1 as $key => $value) {
-        if ($file1[$key]['correct'] == $priem["q$key"]) {
-            echo "$key -- Верно<br>";
-        } else echo "$key -- Неверно<br>";
-    }
+            if ($file1[$key]['correct'] == $priem["q$key"]) {
+                $i++;
+                echo "$key -- Верно<br>";
+            } else echo "$key -- Неверно<br>";
+        }
+        echo $i;
     echo '
 <form method="post">
 <input type="text" name="name">введите имя
 <input type="submit" value="отправить">
 </form>
 ';
-    $name = "";
-    $name = $_POST['name'];
-    echo $name;
+    if (isset($_POST['name']) and !empty($_POST['name'])){
+        $name = $_POST['name'];
+        echo $name;
+        //print_r(gd_info());
+       generateSertif($i,$name);
+    }
 }
+
+
 ?>
