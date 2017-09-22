@@ -21,5 +21,6 @@ $numb = $i + 2;
 $name = file_get_contents('name.txt');
 $name = "на имя $name";
 $i = "количество верных ответов = $i";
+//var_dump(gd_info());exit();
 generateSertif($i, $name, $numb);
 ?>

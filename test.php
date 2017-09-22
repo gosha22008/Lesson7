@@ -60,10 +60,8 @@ if (!empty($priem)) {
 ';
     if (isset($_POST['name']) and !empty($_POST['name'])) {
         $name = $_POST['name'];
-
         file_put_contents('name.txt', $name);
         header('Location: GD.php ');
-
     }
 }
 
