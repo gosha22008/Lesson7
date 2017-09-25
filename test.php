@@ -17,7 +17,6 @@ ob_start();
         header("HTTP/1.0 404 Not Found");
         //http_response_code(404);
         die('такого файла не найдено!');
-
     }
     ?>
     <body>
@@ -39,31 +38,30 @@ ob_start();
     </body>
     </html>
 <?php
-//include_once 'GD.php';
 $priem = $_POST;
-$i = 0;
-if (!empty($priem)) {
+if (isset($priem['q0']) and isset($priem['q1']) and isset($priem['q2'])) {
+    $i = 0;
     foreach ($file1 as $key => $value) {
         if ($file1[$key]['correct'] == $priem["q$key"]) {
             $i++;
             echo "$key -- Верно<br>";
-            file_put_contents('numb.txt',$i);
-        } else echo "$key -- Неверно<br>";
+
+        } else {
+            echo "$key -- Неверно<br>";
+        }
     }
-    echo $i;
-    //file_put_contents('numb.txt',$i);
+    file_put_contents('numb.txt', $i);
     echo '
 <form method="post">
 <input type="text" name="name">введите имя
 <input type="submit" value="отправить">
 </form>
 ';
-    if (isset($_POST['name']) and !empty($_POST['name'])) {
-        $name = $_POST['name'];
-        file_put_contents('name.txt', $name);
-        header('Location: GD.php ');
-    }
 }
-
-ob_end_flush();
+if (isset($_POST['name']) and !empty($_POST['name'])) {
+    $name = $_POST['name'];
+    file_put_contents('name.txt', $name);
+    header('Location: index.php ');
+    ob_end_flush();
+}
 ?>
